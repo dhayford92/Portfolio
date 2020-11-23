@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="card bg-dark text-white">
+        <img src="{% static 'images/bg.jpg' %}" class="card-img" alt="...">
+        <div class="card-img-overlay">
+            <center>
+                <h5 class="card-title">{{ post.name }}</h5>
+            </center>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-8">
+            <img src="{{ post.image.url }}" alt="" width="100%">
+        </div>
+        <div class="col-md-4">
+            <h5>About the project:</h5>
+            <p>{{ post.body }}</p>
+            <br>
+            <h5>Technology used:</h5>
+            <p>{{ post.categories }}</p>
+        </div>
+    </div>
+{% endblock %}

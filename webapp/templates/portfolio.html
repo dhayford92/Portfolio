@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="card bg-dark text-white">
+    <img src="{% static 'images/bg.jpg' %}" class="card-img" alt="...">
+    <div class="card-img-overlay">
+        <center>
+            <h5 class="card-title">My Portfolio</h5>
+        </center>
+    </div>
+</div>
+<br>
+<center>
+    <h3 class="card-title">All Projects</h3>
+</center>
+    <div class="row row-cols-1 row-cols-md-3">
+        {% for post in posts %}
+        <div class="col mb-4">
+            <div class="card h-100">
+                <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.name }}</h5> -
+                    {% for category in post.categories.all %}
+                        <small><a href="#">{{ category.name }}</a></small>
+                    {% endfor %}
+                    <a class="btn btn-outline-primary" href="{% url 'detail' post.pk %}"><span>View More</span></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

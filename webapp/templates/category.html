@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card bg-dark text-white">
+    <img src="{% static 'images/bg.jpg' %}" class="card-img" alt="...">
+    <div class="card-img-overlay">
+        <center>
+            <h5 class="card-title">{{ cats }}</h5>
+        </center>
+    </div>
+</div>
+<br>
+<center>
+    <h3 class="card-title">All Post</h3>
+</center>
+    <div class="row row-cols-1 row-cols-md-3">
+        {% for cat in category %}
+        <div class="col mb-4">
+            <div class="card h-100">
+                <img src="{{ cat.image.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ cat.name }}</h5>
+                    <a class="btn btn-outline-primary" href="{% url 'detail' cat.pk %}"><span>View More</span></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

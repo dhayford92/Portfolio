@@ -1,0 +1,98 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<section class="home_banner_area">
+    <div class="banner_inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="banner_content"><br>
+                        <h3 class="text-uppercase">Hell0</h3>
+                        <h1 class="text-uppercase">I am Denzel Hayford</h1>
+                        <h5 class="text-uppercase">Senior Software Enginer</h5><br>
+                        <div class="d-flex align-items-center">
+                            <a class="btn btn-outline-primary" href="/blog"><span>Blog </span></a>
+                            <a class="btn btn-outline-primary" href="#"><span>Contact</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="home_right_img">
+                        <img class="" src="{% static 'img/home-right.png' %}"  alt="" height=400>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+<br>
+<center>
+    <h3 class="card-title">Categories</h3>
+</center>
+<div class="row row-cols-1 row-cols-md-3">
+    {% for cat in category %}
+    <div class="col mb-4">
+        <div class="card h-100">
+            <img src="{{ cat.image.url }}" class="card-img-top" height=200 alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ cat.name }}</h5>
+                <a class="btn btn-outline-primary" href="#"><span>View More</span></a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<br>
+<center>
+    <h3 class="card-title">Latest Project</h3>
+</center>
+<div class="row row-cols-1 row-cols-md-3">
+    {% for post in posts %}
+    <div class="col mb-4">
+        <div class="card h-100">
+            <img src="{{ post.image.url }}" class="card-img-top" height=130 alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.name }}</h5>-<small><a href="#">{{ post.category }}</a></small>
+                <p class="card-text"> {{ post.body|slice:":150" }}...</p>
+                <a class="btn btn-outline-primary" href="{% url 'detail' post.pk %}"><span>Read More</span></a>-
+                <small>{{ post.date }}</small> </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<br>
+<center>
+    <h3 class="card-title">About Me</h3>
+</center>
+<div class="card mb-3" style="max-width: 700px;">
+    <div class="row no-gutters">
+        <div class="col-md-4">
+            <img src="{% static 'images/' %}" class="card-img" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">Denzel Hayford</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            </div>
+        </div>
+    </div>
+</div><br>
+<center>
+    <h3 class="card-title">Latest Blog Posts</h3>
+</center>
+<div class="card-group">
+    {% for blog in latest_post %}
+    <div class="card">
+        <img src="{{ blog.image.url }}" class="card-img-top" height=100 alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ blog.name }}</h5>
+            <p class="card-text">{{ blog.body }}</p>
+            <a class="btn btn-outline-primary" href="{% url 'blog-detail' blog.pk %}"><span>Read More</span></a>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">{{ blog.created_on.date }}</small>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
