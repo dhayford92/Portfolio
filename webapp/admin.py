@@ -7,5 +7,17 @@ class ProjectAdmin(admin.ModelAdmin):
     class Meta:
         model = Project
 
+
+
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'date')
+
+    class Meta:
+        model = Contact
+
+
+
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Category)
+admin.site.register(Contact, ContactAdmin)
+admin.site.register(AddProfileImage)

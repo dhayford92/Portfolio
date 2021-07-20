@@ -1,32 +1,73 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="card bg-dark text-white">
-    <img src="{% static 'images/bg.jpg' %}" class="card-img" alt="...">
-    <div class="card-img-overlay">
-        <center>
-            <h5 class="card-title">My Portfolio</h5>
-        </center>
-    </div>
+<div class="container">
+  <div class="hamburger-menu">
+      <div class="line line-1"></div>
+      <div class="line line-2"></div>
+      <div class="line line-3"></div>
+  </div>
 </div>
-<br>
-<center>
-    <h3 class="card-title">All Projects</h3>
-</center>
-    <div class="row row-cols-1 row-cols-md-3">
-        {% for post in posts %}
-        <div class="col mb-4">
-            <div class="card h-100">
-                <img src="{{ post.image.url }}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{ post.name }}</h5> -
-                    {% for category in post.categories.all %}
-                        <small><a href="#">{{ category.name }}</a></small>
-                    {% endfor %}
-                    <a class="btn btn-outline-primary" href="{% url 'detail' post.pk %}"><span>View More</span></a>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
+<section class="sidebar">
+      <ul class="menu">
+          <li class="menu-item">
+              <a href="/" class="menu-link" data-content="Home">Home</a>
+          </li>
+          <li class="menu-item">
+              <a href="/#portfolio" class="menu-link" data-content="Products">Portfolio</a>
+          </li>
+          <li class="menu-item">
+              <a href="/#about" class="menu-link" data-content="Cart">About Me</a>
+          </li>
+          <li class="menu-item">
+              <a href="/#contact" class="menu-link" data-content="Checkout">Contact</a>
+          </li>
+      </ul>
+      <div class="social-media">
+        <a href="https://gh.linkedin.com/in/denzel-hayford-156719103"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/cosby_xx/"><i class="fab fa-instagram"></i></a>
+        <a href="https://twitter.com/dhayford92"><i class="fab fa-twitter"></i></a>
+        <a href="https://github.com/dhayford92"><i class="fab fa-github"></i></a>
     </div>
+  </section>
+  <section class="blog-details spad" style="padding: 5rem 0;">
+    <div class="container">
+        <div class="heading_container">
+            <h2>
+                All my projects
+            </h2>
+        </div><br><br>
+  <div class="row row-cols-2 row-cols-md-3">
+      {% for post in object_list %}
+      <div class="col mb-3">
+        <div class="card">
+            <img src="{{ post.image.url }}" class="card-img-top" alt="..." width="500">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.description|slice:':120' }}</p>
+            <a href="{% url 'detail' post.pk %}" class="btn btn-outline-info mb-3">Read More</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <div class="col mb-6">
+        {% if is_paginated %}
+          {% if page_obj.has_previous %}
+            <a class="btn btn-outline-info mb-4" href="?page=1">first</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">previous</a>
+          {% endif %}
+          {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+              <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and  num > page_obj.number|add:'3' %}
+              <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">next</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_page }}">last</a>
+          {% endif %}
+        {% endif %}
+      </div>
+  </div></div></section>
 {% endblock %}

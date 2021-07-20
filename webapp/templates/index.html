@@ -1,4 +1,35 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% extends "base.html" %}
+ {% load static %} 
+ {% block content %}
+ <div class="container">
+    <div class="hamburger-menu">
+        <div class="line line-1"></div>
+        <div class="line line-2"></div>
+        <div class="line line-3"></div>
+    </div>
+</div>
+ <section class="sidebar">
+        <ul class="menu">
+            <li class="menu-item">
+                <a href="#" class="menu-link" data-content="Home">Home</a>
+            </li>
+            <li class="menu-item">
+                <a href="#portfolio" class="menu-link" data-content="Products">Portfolio</a>
+            </li>
+            <li class="menu-item">
+                <a href="#about" class="menu-link" data-content="Cart">About Me</a>
+            </li>
+            <li class="menu-item">
+                <a href="#contact" class="menu-link" data-content="Checkout">Contact</a>
+            </li>
+        </ul>
+        <div class="social-media">
+            <a href="https://gh.linkedin.com/in/denzel-hayford-156719103"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/cosby_xx/"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/dhayford92"><i class="fab fa-twitter"></i></a>
+            <a href="https://github.com/dhayford92"><i class="fab fa-github"></i></a>
+        </div>
+    </section>
 <section class="home_banner_area">
     <div class="banner_inner">
         <div class="container">
@@ -7,92 +38,133 @@
                     <div class="banner_content"><br>
                         <h3 class="text-uppercase">Hell0</h3>
                         <h1 class="text-uppercase">I am Denzel Hayford</h1>
-                        <h5 class="text-uppercase">Senior Software Enginer</h5><br>
+                        <h5 class="text-uppercase">Senior Software Developer</h5><br>
                         <div class="d-flex align-items-center">
-                            <a class="btn btn-outline-primary" href="/blog"><span>Blog </span></a>
-                            <a class="btn btn-outline-primary" href="#"><span>Contact</span></a>
+                            <a class="btn btn-outline-primary" href="#contact"><span>Hire me</span></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-5">
                     <div class="home_right_img">
-                        <img class="" src="{% static 'img/home-right.png' %}"  alt="" height=400>
+                        <img class="img-fluid" src="{% static 'img/hello.svg' %}"  alt="" >
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<br>
-<br>
-<center>
-    <h3 class="card-title">Categories</h3>
-</center>
-<div class="row row-cols-1 row-cols-md-3">
-    {% for cat in category %}
-    <div class="col mb-4">
-        <div class="card h-100">
-            <img src="{{ cat.image.url }}" class="card-img-top" height=200 alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{ cat.name }}</h5>
-                <a class="btn btn-outline-primary" href="#"><span>View More</span></a>
+<section id="services">
+    <div class="container">
+        <h1>My Services</h1>
+        <div class="row services">
+            <div class="col-md-3 text-center">
+                <div class="icon"><i class="fas fa-desktop"></i></div> 
+                <h3>Web Developement</h3>
+                <p>I build web apps and websites. I am into more of the backend. I use django in the python language for my web Developement.
+                     I can work with multipal developers to work on a project. For the database I use mysql, firebase and Sqlite</p>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="icon"><i class="fas fa-tablet-alt"></i></div>
+                <h3>App Developement</h3>
+                <p>I use flutter in the dart language to build mobile apps. I develop both android and iOS apps. I have experience with api, firebase, sqlite and parse-servers for integrating the backend</p>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="icon"><i class="fas fa-paint-brush"></i></div>
+                <h3>Ui/UX</h3>
+                <p>I design powerful UI and Ux for most of my projects. I used AdobeXD for my work. I build prototypes using Adobe XD. </p>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="icon"><i class="fas fa-chart-line"></i></div>
+                <h3>API</h3>
+                <p>I develop most of my application development interface using django in the python language. My develop powerfulinferface for easy management of the api. I have experience using swagger for my api documentation.</p>
             </div>
         </div>
     </div>
-    {% endfor %}
-</div>
-<br>
-<center>
-    <h3 class="card-title">Latest Project</h3>
-</center>
-<div class="row row-cols-1 row-cols-md-3">
-    {% for post in posts %}
-    <div class="col mb-4">
-        <div class="card h-100">
-            <img src="{{ post.image.url }}" class="card-img-top" height=130 alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{ post.name }}</h5>-<small><a href="#">{{ post.category }}</a></small>
-                <p class="card-text"> {{ post.body|slice:":150" }}...</p>
-                <a class="btn btn-outline-primary" href="{% url 'detail' post.pk %}"><span>Read More</span></a>-
-                <small>{{ post.date }}</small> </div>
+</section>
+<section id="portfolio" class="works">
+    <h2 class="title">Some Of My Works</h2>
+        <br>
+    <div class="container">
+        <div class="row">
+            {% for post in posts|slice:'6' %}
+            <div class="col-md-4 col-xs-6">
+                <div class="portfolio-item">
+                     <img src="{{ post.image.url }}" class="img-res" alt="">
+                    <div class="portfolio-item-info">
+                        <h4>{{ post.title }}</h4>
+                        <a href="{% url 'detail' post.pk %}" data-toggle="modal" data-target="#portfolioItem3"><span class="fas fa-eye"></span></a>
+                    </div><!-- /.portfolio-item-info -->
+                </div><!-- /.portfolio-item -->
+            </div>
+            {% endfor %}
+            <div col-md-4 col-xs-6>
+                <a href="{% url 'portfolio' %}" class="btn btn-outline-info mb-3">See More</a>
+            </div>
         </div>
     </div>
-    {% endfor %}
-</div>
+</section>
+<!--About section-->
+<section class="about" id="about">
+    <h2 class="title">About Us</h2>
+        <div class="container">
+            <!--first row ie web dev -->
+            <div class="row">
+                <div class="col-md-6">
+                    {% for img in image %}
+                        {% if img.active %}
+                        <img src="{{ img.image.url }}" alt="" class="img-fluid">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col-md-6">
+                <h1 class="text-1">Denzel Hayford</h1>
+                <p class="text-muted">I am a professsional Developer because I have been doing this for five years now. I love and have passion for building things. I have worked with many companies and individuals I have my own team. The programming languages I write with are python, dart and C++. For the frameworks I work with Flutter and Django. For my works I build web apps, Mobile apps and API for integrations and I designs UI/UX. Am good with adobe XD, Swagger and Git. When comes to management, I can manage a team in hard and soft situations.</p>
+                </div>
+            </div>
+        </div>
+</section>
+<!--Contact section-->
+<section id="contact">
+    <h1>Contact Us</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-4">Let Me Handle Your Project Professionaly</h2>
+                <p class="text-muted">I can bring your imagination into the real world and also make your dreams come through. Just contact me with your ideas or problems</p>
+            </div>
+                <div id="form" class="col-md-6">
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.tags == 'success' %}
+                                <h3 class="alert alert-successs">{{ message }}</h3>
+                            {% else %}
+                            <h3 class="alert alert-error">{{ message }}</h3>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <form action="{% url 'contact' %}" class="contact-info" method="post">
+                        {% csrf_token %}
+                       <div class="form-group">
+                           <input type="text" class="form-control" placeholder="Your Name" name="name">
+                       </div>
+   
+                       <div class="form-group">
+                           <input type="email" class="form-control" placeholder="Your Email" name="email">
+                       </div>
+   
+                       <div class="form-group">
+                           <input type="phone" class="form-control" placeholder="Your Telephone No" name="number">
+                       </div>
+   
+                       <div class="form-group">
+                           <textarea cols="30" rows="4" class="form-control" placeholder="Your Message" name="message"></textarea>
+                       </div>
+                       <button class="btn btn-outline-primary float-right" type="submit">Send</button>
+                   </form><br><br>
+               </div>
 
-<br>
-<center>
-    <h3 class="card-title">About Me</h3>
-</center>
-<div class="card mb-3" style="max-width: 700px;">
-    <div class="row no-gutters">
-        <div class="col-md-4">
-            <img src="{% static 'images/' %}" class="card-img" alt="...">
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <h5 class="card-title">Denzel Hayford</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
             </div>
         </div>
     </div>
-</div><br>
-<center>
-    <h3 class="card-title">Latest Blog Posts</h3>
-</center>
-<div class="card-group">
-    {% for blog in latest_post %}
-    <div class="card">
-        <img src="{{ blog.image.url }}" class="card-img-top" height=100 alt="...">
-        <div class="card-body">
-            <h5 class="card-title">{{ blog.name }}</h5>
-            <p class="card-text">{{ blog.body }}</p>
-            <a class="btn btn-outline-primary" href="{% url 'blog-detail' blog.pk %}"><span>Read More</span></a>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">{{ blog.created_on.date }}</small>
-        </div>
-    </div>
-    {% endfor %}
-</div>
+
 {% endblock %}
